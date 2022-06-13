@@ -3,7 +3,6 @@ local previewRot = 0
 local previewVehicle;
 local previewVehicleTimer;
 local function handleOpenCarShopWindow(vehiclesToSell)
-    outputChatBox("Opening Car Shop Window..."..#vehiclesToSell)
     -- WINDOW
     local scrWidth, scrHeight = guiGetScreenSize()
     local windowWidth, windowHeight = 500, 400
@@ -18,6 +17,7 @@ local function handleOpenCarShopWindow(vehiclesToSell)
         destroyElement(window)
         showCursor(false)
         setPlayerHudComponentVisible("all", true)
+        setElementFrozen(localPlayer, false)
     end)
 
     -- LIST
@@ -30,17 +30,73 @@ local function handleOpenCarShopWindow(vehiclesToSell)
         guiGridListSetItemText(carsList, row, 2, "R$ "..vehicle.price..",00", false, false)
     end
 
+    -- COLOR PICKER
+    local r1, g1, b1, r2, g2, b2, r3, g3, b3 = 0, 0, 0, 255, 255, 255, 0, 0, 0
+    guiCreateLabel(0.55, 0.08, 0.4, 0.04, "Vermelho", true, window)
+    setElementID(guiCreateScrollBar(0.55, 0.14, 0.4, 0.05, true, true, window), "r")
+
+    guiCreateLabel(0.55, 0.22, 0.4, 0.04, "Verde", true, window)
+    setElementID(guiCreateScrollBar(0.55, 0.28, 0.4, 0.05, true, true, window), "g")
+
+    guiCreateLabel(0.55, 0.37, 0.4, 0.04, "Azul", true, window)
+    setElementID(guiCreateScrollBar(0.55, 0.43, 0.4, 0.05, true, true, window), "b")
+
+    local color1Radio = guiCreateRadioButton(0.55, 0.50, 0.1, 0.05, "Cor 1", true, window)
+    local color2Radio = guiCreateRadioButton(0.70, 0.50, 0.1, 0.05, "Cor 2", true, window)
+    local color3Radio = guiCreateRadioButton(0.85, 0.50, 0.1, 0.05, "Cor 3", true, window)
+    guiRadioButtonSetSelected(color1Radio, true)
+    addEventHandler("onClientGUIClick", color1Radio, function() 
+        guiScrollBarSetScrollPosition(getElementByID("r"), (r1 * 100) / 255)
+        guiScrollBarSetScrollPosition(getElementByID("g"), (g1 * 100) / 255)
+        guiScrollBarSetScrollPosition(getElementByID("b"), (b1 * 100) / 255)
+    end, false)
+    addEventHandler("onClientGUIClick", color2Radio, function() 
+        guiScrollBarSetScrollPosition(getElementByID("r"), (r2 * 100) / 255)
+        guiScrollBarSetScrollPosition(getElementByID("g"), (g2 * 100) / 255)
+        guiScrollBarSetScrollPosition(getElementByID("b"), (b2 * 100) / 255)
+    end, false)
+    addEventHandler("onClientGUIClick", color3Radio, function() 
+        guiScrollBarSetScrollPosition(getElementByID("r"), (r3 * 100) / 255)
+        guiScrollBarSetScrollPosition(getElementByID("g"), (g3 * 100) / 255)
+        guiScrollBarSetScrollPosition(getElementByID("b"), (b3 * 100) / 255)
+    end, false)
+
+    addEventHandler("onClientGUIScroll", window, function() 
+        if(not isElement(previewVehicle)) then return end
+        
+        local elementId = getElementID(source)
+        if(elementId == "r") then 
+            if(guiRadioButtonGetSelected(color1Radio)) then r1 = (guiScrollBarGetScrollPosition(source) / 100) * 255 end
+            if(guiRadioButtonGetSelected(color2Radio)) then r2 = (guiScrollBarGetScrollPosition(source) / 100) * 255 end
+            if(guiRadioButtonGetSelected(color3Radio)) then r3 = (guiScrollBarGetScrollPosition(source) / 100) * 255 end
+        end
+        if(elementId == "g") then 
+            if(guiRadioButtonGetSelected(color1Radio)) then g1 = (guiScrollBarGetScrollPosition(source) / 100) * 255 end
+            if(guiRadioButtonGetSelected(color2Radio)) then g2 = (guiScrollBarGetScrollPosition(source) / 100) * 255 end
+            if(guiRadioButtonGetSelected(color3Radio)) then g3 = (guiScrollBarGetScrollPosition(source) / 100) * 255 end
+        end
+        if(elementId == "b") then 
+            if(guiRadioButtonGetSelected(color1Radio)) then b1 = (guiScrollBarGetScrollPosition(source) / 100) * 255 end
+            if(guiRadioButtonGetSelected(color2Radio)) then b2 = (guiScrollBarGetScrollPosition(source) / 100) * 255 end
+            if(guiRadioButtonGetSelected(color3Radio)) then b3 = (guiScrollBarGetScrollPosition(source) / 100) * 255 end
+        end
+        
+        setVehicleColor(previewVehicle, r1, g1, b1, r2, g2, b2, r3, g3, b3, r3, g3, b3)
+    end)
+    
+
     -- LISTEN LIST ITEM CLICK
     addEventHandler("onClientGUIClick", carsList, function() 
+        setElementFrozen(localPlayer, true)
         local row, col = guiGridListGetSelectedItem(carsList)
         local vehicle = vehiclesToSell[row + 1]
         if(vehicle == false or vehicle == nil) then return end
 
-        outputChatBox("Você solicitou o veículo "..vehicle.modelId)
         if(isElement(previewVehicle)) then destroyElement(previewVehicle) end
         
         local vehicleXOffset = 3
-        previewVehicle = createVehicle(vehicle.modelId, previewX + vehicleXOffset, previewY, previewZ, previewRot, 0, 0, "CARSHOP")
+        previewVehicle = createVehicle(vehicle.modelId, previewX + vehicleXOffset, previewY, previewZ, previewRot, 0, 0, "CAR SHOP")
+        setVehicleColor(previewVehicle, r1, g1, b1, r2, g2, b2, r3, g3, b3, r3, g3, b3)
         setElementFrozen(previewVehicle, true)
         
         local cameraZoom = 10
@@ -50,7 +106,6 @@ local function handleOpenCarShopWindow(vehiclesToSell)
         
         if(isTimer(previewVehicleTimer)) then killTimer(previewVehicleTimer) end
         previewVehicleTimer = setTimer(function() 
-            outputChatBox(toJSON(previewRot), 255, 255, 255, true)
             previewRot = previewRot + 1
             setElementRotation(previewVehicle, 0, 0, previewRot)
             if(previewRot > 360) then previewRot = 0 end
