@@ -39,6 +39,7 @@ function handlePlayerLogin()
     local player = source
     local playerAccount = getPlayerAccount(source)
     
+    local skin = getAccountData(playerAccount, SKIN_KEY) or INITIAL_SKINS[math.random(1, #INITIAL_SKINS)]
     local position = getAccountData(playerAccount, POSITION_KEY) or INITIAL_POSITION
     local x, y, z = position:match("([^,]+),([^,]+),([^,]+)")
     spawnPlayer(player, x, y, z + 2, 0, skin)
