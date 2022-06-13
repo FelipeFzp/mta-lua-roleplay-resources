@@ -1,0 +1,71 @@
+[roleplay]
+OK - Criar gamemode
+OK - Carregar resource jobs
+OK - Carregar resource persistent_player_data
+OK - Carregar resource required_login_panel
+OK - Carregar resource actions_panel
+OK - Carregar resource player_blips
+OK - Criar spawn point
+OK - Melhorar camera de morte
+OK - Fazer gestão dos veículos dos players
+
+f_required_login_panel
+OK - Ao entrar a GUI fica escondida e o usuário precisa criar ou entrar com sua conta
+OK - Quando o player morrer se estiver logado reespawna no hospital mais próximo
+OK - BUG AO SE CADASTRAR, ERRO DE SEM PERMISSÃO 
+
+f_jobs
+OK - Ao pegar uma profissão criar blip + marker no mapa
+OK - Não deixar trocar de emprego se estiver com missão em progresso
+OK - On resource start criar blips e markers dos empregos dos jogadores
+OK - Ao entrar no server criar blip no mapa com a profissão atual
+OK - Melhorar mensagens da troca de emprego
+OK - Não abrir janela de outra missão quando já estiver em uma     
+	job_doctor_client
+		Ideias para agora:
+			OK - Adicionar tempo
+			OK - Utilizar apenas ambulância
+			OK - Melhorar animação de entrando no carro, fazer ped entrar no carro
+			OK - Só adicionar spray se tiver menos que 60
+		Ideias futuras:
+			Missões aleatórias via rádio
+	job_plane_client
+		Ideias para agora:
+			OK - Adicionar tempo
+			OK - Viajar entre os 4 aeroportos
+			OK - Entregar airdrops próximo aos aeroportos
+			PENDENTE - Criar rotas dos airdrops
+	job_firefighter_client
+		Ideias para agora:
+			Adicionar tempo
+			Cria pontos de incendios
+			Dar exintor
+		Ideias futuras:
+			Missões aleatórias via rádio
+	job_garbage_client
+		Adicionar N lixeiras com blips
+		Quanto mais nivel mais dinheiro por lixeira
+		Quanto menos tempo aumenta o premio final ao entregar caminhão de lixo
+		Precisa buzinar para pegar o lixo
+	
+
+
+f_actions_panel
+Painel no qual o usuário pode acessar
+	OK - Menu dd trabalho (Solicitar carro da profissão, ver estatisticas, como cancelar um serviço em andamento)
+	OK - Abrir somente quando logado
+	OK - Menu de emotes
+	OK - No inicio faz um get pro server side para trazer os resources carregados, os que não vierem desabilita os menus, 
+	- Menu de carros
+	- Menu de skins
+	- Menu de efeitos (gravidade baixa, correr rápido, crab mode)
+	e mover lógicas de integração para os resources especificos
+	
+f_car_shop
+PENDENTE - Permitir comprar um carro e trocar a cor no momento da compra https://wiki.multitheftauto.com/wiki/CreateVehicle
+PENDENTE - trocar a cor e customizar https://wiki.multitheftauto.com/wiki/GetVehicleCompatibleUpgrades https://wiki.multitheftauto.com/wiki/AddVehicleUpgrade
+
+
+f_persistent_player_data
+OK - Persistir vida, colete, dinheiro, armas e localização (preparar para no futuro persistir residências e carros)
+PENDENTE - Skin padrão não funciona, ta vindo CJ

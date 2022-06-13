@@ -3,8 +3,13 @@
 
      <script src="car_shop_client.lua" type="client" cache="false"/>
      <script src="car_shop_server.lua" type="server" />
+     <script src="car_shop_db_server.lua" type="server" />
 
      <settings>
-          <setting name="*free_cars_ids" value="462,516" />
+          <setting name="#car_shop_container_prefix" value="carshop_" friendlyname="Prefixo dos elementos grupo das lojas de carros" group="Geral" desc="Prefixo para os ids dos grupos de elementos das lojas de carros" />
+          
+          <setting name="*car_shop_locations" value="542.3046875,-1287.189453125,16"  friendlyname="Localizações das lojas de carros" group="Lojas de Carros" desc="Localização das lojas de carros. Formato: x,y,z;x,y,z... (Reinício do recurso obrigatório)" />
+          <setting name="*free_cars_ids" value="462,516" friendlyname="Veículos iniciais (Grátis)" group="Lojas de Carros" desc="Lista de IDs dos carros disponíveis a todos os jogadores desde seu primeiro login"/>
+          <setting name="*paid_cars_ids" value="496=5200,463=2300" friendlyname="Tabela de Veículos/Preços" group="Lojas de Carros" desc="Lista de carros permitida a venda com seu respectivo preço. Formato: modelId=preço,modelId=preço... (Reinício do recurso obrigatório)"/>
      </settings>
 </meta>

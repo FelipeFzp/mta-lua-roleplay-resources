@@ -16,11 +16,11 @@
     <setting name="#job_container_prefix" value="job_" friendlyname="Prefixo dos elementos grupo das missões" group="Geral" desc="Prefixo para os ids dos grupos de elementos das quests" />
 
     <setting name="*doctor_level_bonus_multiplier" value="0.5" friendlyname="Multiplicador de recompensa" desc="Multiplicador de recompensa por nivel" group="Paramédico" />
-    <setting name="*heal_patient_quest_reward" value="1000" friendlyname="Recompensa Curar Paciente" desc="Recompensa da missão 'Curar Paciente'" group="Paramédico" />
-    <setting name="*rescue_patient_quest_reward" value="1800" friendlyname="Recompensa Resgatar Paciente" desc="Recompensa da missão 'Resgatar Paciente'" group="Paramédico" />
+    <setting name="*heal_patient_quest_reward" value="1000" friendlyname="Recompensa Curar Paciente" desc="Recompensa da missão 'Curar Paciente' (Reinício do recurso obrigatório)" group="Paramédico" />
+    <setting name="*rescue_patient_quest_reward" value="1800" friendlyname="Recompensa Resgatar Paciente" desc="Recompensa da missão 'Resgatar Paciente' (Reinício do recurso obrigatório)" group="Paramédico" />
 
     <setting name="*plane_level_bonus_multiplier" value="0.5" friendlyname="Multiplicador de recompensa" desc="Multiplicador de recompensa por nivel" group="Piloto" />
-    <setting name="*delivery_package_quest_reward" value="1000" friendlyname="Recompensa Entregar Pacote" desc="Recompensa base da missão 'Entregar Pacote'" group="Piloto" />
-    <setting name="*airdrop_packages_quest_reward" value="1800" friendlyname="Recompensa Airdrop de Pacotes" desc="Recompensa base da missão 'Airdrop de Pacotes'" group="Piloto" />
+    <setting name="*delivery_package_quest_reward" value="1000" friendlyname="Recompensa Entregar Pacote" desc="Recompensa base da missão 'Entregar Pacote' (Reinício do recurso obrigatório)" group="Piloto" />
+    <setting name="*airdrop_packages_quest_reward" value="1800" friendlyname="Recompensa Airdrop de Pacotes" desc="Recompensa base da missão 'Airdrop de Pacotes' (Reinício do recurso obrigatório)" group="Piloto" />
   </settings>
 </meta>
