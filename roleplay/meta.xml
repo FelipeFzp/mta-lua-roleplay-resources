@@ -1,0 +1,19 @@
+<meta>
+    <oop>true</oop>
+	<info author="Felipe Panassol Zaniol" description="A roleplay gamemode developed by me to learn LUA language" version="1.5" type="gamemode" />
+	
+	<include resource="clear_chat" />
+	<include resource="jobs" />
+	<include resource="persistent_player_data" />
+	<include resource="required_login_panel" />
+	<include resource="actions_panel" />
+	<include resource="player_blips" />
+	<include resource="car_shop" />
+	
+    <script src="gamemode_server.lua" type="server" />
+
+	<settings>
+		<setting group="Jogador" name="*player_respawn_time" value="10000" friendlyname="Tempo de respawn" desc="Tempo que o jogo espera para reviver o jogador" />
+		<setting group="Veículos" name="*max_veh_per_player" value="5" friendlyname="Max. Veículos" desc="Nº Máximo de veículos por jogador" />
+	</settings>
+</meta>

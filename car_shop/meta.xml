@@ -1,0 +1,6 @@
+<meta>
+     <info author="Felipe Panassol Zaniol" description="A resource to allow player buy and modify cards in a roleplay gameplay. Developed by me to learn LUA language" />
+
+     <script src="car_shop_client.lua" type="client" cache="false"/>
+     <script src="car_shop_server.lua" type="server" />
+</meta>

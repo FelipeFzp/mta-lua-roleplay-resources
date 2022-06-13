@@ -1,0 +1,6 @@
+<meta>
+     <info author="Felipe Panassol Zaniol" description="A login panel that requires player login to play developed by me to learn LUA language" />
+
+     <script src="required_login_panel_client.lua" type="client" cache="false"/>
+     <script src="required_login_panel_server.lua" type="server" />
+</meta>

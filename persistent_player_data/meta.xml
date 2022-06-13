@@ -1,0 +1,5 @@
+<meta>
+     <info author="Felipe Panassol Zaniol" description="A resource that persist player data on logoff or server exist developed by me to learn LUA language" />
+
+     <script src="persistent_player_data_server.lua" type="server" />
+</meta>

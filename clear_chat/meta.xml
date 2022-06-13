@@ -1,0 +1,5 @@
+<meta>
+     <info author="Felipe Panassol Zaniol" description="A clear chat command developed by me to learn LUA language" />
+
+     <script src="clear_chat_client.lua" type="client" />
+</meta>
