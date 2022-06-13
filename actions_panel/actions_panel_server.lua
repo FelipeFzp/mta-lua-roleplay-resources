@@ -73,7 +73,6 @@ local function loadCurrentEmote(loggedAccount)
     end)
 end
 
--- COMMON
 local function handleSpawnVehicle(vehicleId)
     if(isPedInVehicle(source)) then return end
     

@@ -128,20 +128,31 @@ ACTIONS_BUTTONS[3] = {
             guiWindowSetSizable(ACTIONS_PANEL_2, false)
             guiWindowSetMovable(ACTIONS_PANEL_2, false)
 
+            -- LIST
+            local carsList = guiCreateGridList(0.05, 0.22, 0.9, 0.65, true, ACTIONS_PANEL_2)
+            guiGridListAddColumn(carsList, "Nome", 0.5)
+            guiGridListAddColumn(carsList, "Modelo", 0.5)
+            for i, vehicle in pairs(vehicles) do
+                local row = guiGridListAddRow(carsList)
+                guiGridListSetItemText(carsList, row, 1, vehicle.model, false, false)
+                guiGridListSetItemText(carsList, row, 2, vehicle.name, false, false)
+            end
+
             -- BUTTONS
+            addEventHandler("onClientGUIClick", 
+            guiCreateButton(0.65, 0.1, 0.3, 0.08, "Solicitar", true, ACTIONS_PANEL_2), function() 
+                local row, col = guiGridListGetSelectedItem(carsList)
+                outputChatBox("Você solicitou o veículo "..vehicles[row + 1].model)
+                triggerServerEvent("spawnVehicle", localPlayer, vehicles[row + 1].id)
+                toggleActionsPanel()
+            end)
+
             addEventHandler("onClientGUIClick", 
             guiCreateButton(0.8, 0.9, 0.2, 0.08, "Voltar", true, ACTIONS_PANEL_2), function() destroyElement(ACTIONS_PANEL_2) end)
 
-            addEventHandler("onClientGUIClick", 
-                guiCreateButton(0.6, 0.1, 0.45, 0.1, "Solicitar veículo", true, ACTIONS_PANEL_2), function() 
-                    triggerServerEvent("spawnVehicle", localPlayer, getVehicleModelFromName("Faggio"))
-                    toggleActionsPanel()
-                end)
-            
             -- LABELS
-            guiLabelSetColor(
-                guiCreateLabel(0.05, 0.145, 0.55, 0.4, "Em desenvolvimento", true, ACTIONS_PANEL_2),
-                240, 0, 0)
+            guiCreateLabel(0.05, 0.1, 0.55, 0.1, "Selecione um veículo e clique", true, ACTIONS_PANEL_2)
+            guiCreateLabel(0.05, 0.14, 0.55, 0.1, "em \"Solicitar\"", true, ACTIONS_PANEL_2)
         end
         addEventHandler("handleGetPlayerCarShopVehicles", localPlayer, handleGetPlayerCarShopVehicles)
     end,

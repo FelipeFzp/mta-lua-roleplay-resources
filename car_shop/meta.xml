@@ -3,4 +3,8 @@
 
      <script src="car_shop_client.lua" type="client" cache="false"/>
      <script src="car_shop_server.lua" type="server" />
+
+     <settings>
+          <setting name="*free_cars_ids" value="462,516" />
+     </settings>
 </meta>
