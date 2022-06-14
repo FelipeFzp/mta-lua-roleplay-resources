@@ -87,6 +87,12 @@ function handleResourceStart()
         local job = getPlayerCurrentJob(getAccountID(playerAccount))
         setTimer(function() createPlayerJobBlips(player, job) end, 2000, 1)
     end
+
+    local map = xmlLoadFile("jobs_base_map.xml", true)
+	if (map) then
+		loadMapData(map, root)
+		xmlUnloadFile(map)
+	end
 end
 addEventHandler("onResourceStart", getResourceRootElement(), handleResourceStart)
 

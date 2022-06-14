@@ -46,5 +46,10 @@ addEventHandler("onPlayerLogin", getRootElement(), function() createPlayerCarSho
 
 function handleResourceStart()
     for k, player in ipairs(getElementsByType("player")) do createPlayerCarShops(player) end
+    local map = xmlLoadFile("car_shop_base_map.xml", true)
+	if (map) then
+		loadMapData(map, root)
+		xmlUnloadFile(map)
+	end
 end
 addEventHandler("onResourceStart", getResourceRootElement(), handleResourceStart)
