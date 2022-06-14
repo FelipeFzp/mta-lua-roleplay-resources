@@ -137,15 +137,15 @@ ACTIONS_BUTTONS[3] = {
                 guiGridListSetItemText(carsList, row, 1, vehicle.model, false, false)
                 guiGridListSetItemText(carsList, row, 2, vehicle.name, false, false)
             end
-
-            -- BUTTONS
-            addEventHandler("onClientGUIClick", 
-            guiCreateButton(0.65, 0.1, 0.3, 0.08, "Solicitar", true, ACTIONS_PANEL_2), function() 
-                local row, col = guiGridListGetSelectedItem(carsList)
-                outputChatBox("Você solicitou o veículo "..vehicles[row + 1].model)
+            local function spawnSelectedVehicle()
+                local row = guiGridListGetSelectedItem(carsList)
                 triggerServerEvent("spawnVehicle", localPlayer, vehicles[row + 1].id)
                 toggleActionsPanel()
-            end)
+            end
+
+            -- BUTTONS
+            addEventHandler("onClientGUIDoubleClick", carsList, spawnSelectedVehicle, false)
+            addEventHandler("onClientGUIClick", guiCreateButton(0.65, 0.1, 0.3, 0.08, "Solicitar", true, ACTIONS_PANEL_2), spawnSelectedVehicle, false)
 
             addEventHandler("onClientGUIClick", 
             guiCreateButton(0.8, 0.9, 0.2, 0.08, "Voltar", true, ACTIONS_PANEL_2), function() destroyElement(ACTIONS_PANEL_2) end)

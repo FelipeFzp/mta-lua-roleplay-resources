@@ -7,19 +7,15 @@ local function handleOpenCarShopWindow(vehiclesToSell)
     local scrWidth, scrHeight = guiGetScreenSize()
     local windowWidth, windowHeight = 500, 400
     local window = guiCreateWindow(scrWidth - windowWidth - 20, (scrHeight - windowHeight) / 2, windowWidth, windowHeight, "Loja de Carros e Motos", false)
-
-    -- BUTTON
-    addEventHandler("onClientGUIClick", 
-    guiCreateButton(0.8, 0.9, 0.2, 0.08, "Voltar", true, window), function() 
+    local function closeWindow()
         if(isElement(previewVehicle)) then destroyElement(previewVehicle) end
         if(isTimer(previewVehicleTimer)) then killTimer(previewVehicleTimer) end
         setCameraTarget(localPlayer)
         destroyElement(window)
         showCursor(false)
         setPlayerHudComponentVisible("all", true)
-        setElementFrozen(localPlayer, false)
-    end)
-
+        setElementFrozen(getPedOccupiedVehicle(localPlayer) or localPlayer, false)
+    end
     -- LIST
     local carsList = guiCreateGridList(0.02, 0.08, 0.5, 0.9, true, window)
     guiGridListAddColumn(carsList, "Modelo", 0.5)
@@ -29,6 +25,25 @@ local function handleOpenCarShopWindow(vehiclesToSell)
         guiGridListSetItemText(carsList, row, 1, getVehicleNameFromModel(vehicle.modelId), false, false)
         guiGridListSetItemText(carsList, row, 2, "R$ "..vehicle.price..",00", false, false)
     end
+
+    -- BUTTON
+    addEventHandler("onClientGUIClick", 
+    guiCreateButton(0.76, 0.9, 0.20, 0.08, "Voltar", true, window), function() 
+        closeWindow()
+    end, false)
+
+    addEventHandler("onClientGUIClick", 
+    guiCreateButton(0.55, 0.9, 0.20, 0.08, "Comprar", true, window), function() 
+        local row, col = guiGridListGetSelectedItem(carsList)
+        local vehicle = vehiclesToSell[row + 1]
+        if(getPlayerMoney(localPlayer) < vehicle.price) then 
+            outputChatBox("Você não tem dinheiro suficiente para comprar um "..getVehicleNameFromModel(vehicle.modelId)..".", 240, 0, 0, true)
+            return 
+        end
+
+        closeWindow()
+        -- TODO SERVER-SIDE: Salvar veículo nos veículos do player e remover dinheiro
+    end, false)
 
     -- COLOR PICKER
     local r1, g1, b1, r2, g2, b2, r3, g3, b3 = 0, 0, 0, 255, 255, 255, 0, 0, 0
@@ -87,7 +102,6 @@ local function handleOpenCarShopWindow(vehiclesToSell)
 
     -- LISTEN LIST ITEM CLICK
     addEventHandler("onClientGUIClick", carsList, function() 
-        setElementFrozen(localPlayer, true)
         local row, col = guiGridListGetSelectedItem(carsList)
         local vehicle = vehiclesToSell[row + 1]
         if(vehicle == false or vehicle == nil) then return end
@@ -98,6 +112,7 @@ local function handleOpenCarShopWindow(vehiclesToSell)
         previewVehicle = createVehicle(vehicle.modelId, previewX + vehicleXOffset, previewY, previewZ, previewRot, 0, 0, "CAR SHOP")
         setVehicleColor(previewVehicle, r1, g1, b1, r2, g2, b2, r3, g3, b3, r3, g3, b3)
         setElementFrozen(previewVehicle, true)
+        setElementFrozen(getPedOccupiedVehicle(localPlayer) or localPlayer, true)
         
         setCameraMatrix(previewX + 10, previewY + 8, previewZ + 2, previewX, previewY, previewZ)
         
