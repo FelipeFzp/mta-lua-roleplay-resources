@@ -115,11 +115,16 @@ local function handleOpenCarShopWindow(vehiclesToSell)
         triggerServerEvent("handlePlayerBuyCar", localPlayer, vehicle.modelId, color1, color2, color3)
     end, false)
     
+    -- PRICE LABEL
+    local priceLabel = guiCreateLabel(0.55, 0.82, 0.45, 0.1, "", true, window)
+    guiSetFont(priceLabel, "clear-normal")
+    guiLabelSetColor(priceLabel, 0, 200, 0)
 
     -- LISTEN LIST ITEM CLICK
     addEventHandler("onClientGUIClick", carsList, function() 
         local row, col = guiGridListGetSelectedItem(carsList)
         local vehicle = guiGridListGetItemData(carsList, row, 1)
+        guiSetText(priceLabel, "Preço: $"..vehicle.price..",00")
         if(vehicle == false or vehicle == nil) then return end
 
         if(isElement(previewVehicle)) then destroyElement(previewVehicle) end
