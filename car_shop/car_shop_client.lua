@@ -1,4 +1,4 @@
-local previewX, previewY, previewZ = 0, 0, 2000
+local previewX, previewY, previewZ = 8, -18, 9994.5
 local previewRot = 0
 local previewVehicle;
 local previewVehicleTimer;
@@ -99,10 +99,7 @@ local function handleOpenCarShopWindow(vehiclesToSell)
         setVehicleColor(previewVehicle, r1, g1, b1, r2, g2, b2, r3, g3, b3, r3, g3, b3)
         setElementFrozen(previewVehicle, true)
         
-        local cameraZoom = 10
-        local cameraAngle = 180
-        local rx, ry, rz = previewX+math.sin(math.rad(cameraAngle)) + cameraZoom, previewY+math.cos(math.rad(cameraAngle)) + cameraZoom, previewZ
-        setCameraMatrix(rx, ry, rz, previewX, previewY, previewZ)
+        setCameraMatrix(previewX + 10, previewY + 8, previewZ + 2, previewX, previewY, previewZ)
         
         if(isTimer(previewVehicleTimer)) then killTimer(previewVehicleTimer) end
         previewVehicleTimer = setTimer(function() 
