@@ -16,34 +16,26 @@ local function handleOpenCarShopWindow(vehiclesToSell)
         setPlayerHudComponentVisible("all", true)
         setElementFrozen(getPedOccupiedVehicle(localPlayer) or localPlayer, false)
     end
+    
     -- LIST
     local carsList = guiCreateGridList(0.02, 0.08, 0.5, 0.9, true, window)
     guiGridListAddColumn(carsList, "Modelo", 0.5)
     guiGridListAddColumn(carsList, "Preço", 0.4)
+    
+    local previousIndex = 1
     for i, vehicle in ipairs(vehiclesToSell) do
-        local row = guiGridListAddRow(carsList)
-        guiGridListSetItemText(carsList, row, 1, getVehicleNameFromModel(vehicle.modelId), false, false)
-        guiGridListSetItemText(carsList, row, 2, "R$ "..vehicle.price..",00", false, false)
-    end
-
-    -- BUTTON
-    addEventHandler("onClientGUIClick", 
-    guiCreateButton(0.76, 0.9, 0.20, 0.08, "Voltar", true, window), function() 
-        closeWindow()
-    end, false)
-
-    addEventHandler("onClientGUIClick", 
-    guiCreateButton(0.55, 0.9, 0.20, 0.08, "Comprar", true, window), function() 
-        local row, col = guiGridListGetSelectedItem(carsList)
-        local vehicle = vehiclesToSell[row + 1]
-        if(getPlayerMoney(localPlayer) < vehicle.price) then 
-            outputChatBox("Você não tem dinheiro suficiente para comprar um "..getVehicleNameFromModel(vehicle.modelId)..".", 240, 0, 0, true)
-            return 
+        if(vehicle.category ~= vehiclesToSell[previousIndex].category or i == 1) then 
+            local categoryHeader = guiGridListAddRow(carsList)
+            guiGridListSetItemText(carsList, categoryHeader, 1, vehicle.category, true, false)
         end
 
-        closeWindow()
-        -- TODO SERVER-SIDE: Salvar veículo nos veículos do player e remover dinheiro
-    end, false)
+        local row = guiGridListAddRow(carsList)
+        guiGridListSetItemText(carsList, row, 1, vehicle.modelName, false, false)
+        guiGridListSetItemText(carsList, row, 2, "R$ "..vehicle.price..",00", false, false)
+        guiGridListSetItemData(carsList, row, 1, vehicle)
+
+        if(i > 1) then previousIndex = previousIndex + 1 end
+    end
 
     -- COLOR PICKER
     local r1, g1, b1, r2, g2, b2, r3, g3, b3 = 0, 0, 0, 255, 255, 255, 0, 0, 0
@@ -98,18 +90,42 @@ local function handleOpenCarShopWindow(vehiclesToSell)
         
         setVehicleColor(previewVehicle, r1, g1, b1, r2, g2, b2, r3, g3, b3, r3, g3, b3)
     end)
+
+    -- BUTTONS
+    addEventHandler("onClientGUIClick", 
+    guiCreateButton(0.76, 0.9, 0.20, 0.08, "Voltar", true, window), function() 
+        closeWindow()
+    end, false)
+
+    addEventHandler("onClientGUIClick", 
+    guiCreateButton(0.55, 0.9, 0.20, 0.08, "Comprar", true, window), function() 
+        local row, col = guiGridListGetSelectedItem(carsList)
+        local vehicle = guiGridListGetItemData(carsList, row, 1)
+
+        if(getPlayerMoney(localPlayer) < vehicle.price) then 
+            outputChatBox("Você não tem dinheiro suficiente para comprar um "..getVehicleNameFromModel(vehicle.modelId)..".", 240, 0, 0, true)
+            return 
+        end
+
+        closeWindow()
+
+        local color1 = r1..","..g1..","..b1
+        local color2 = r2..","..g2..","..b2
+        local color3 = r3..","..g3..","..b3
+        triggerServerEvent("handlePlayerBuyCar", localPlayer, vehicle.modelId, color1, color2, color3)
+    end, false)
     
 
     -- LISTEN LIST ITEM CLICK
     addEventHandler("onClientGUIClick", carsList, function() 
         local row, col = guiGridListGetSelectedItem(carsList)
-        local vehicle = vehiclesToSell[row + 1]
+        local vehicle = guiGridListGetItemData(carsList, row, 1)
         if(vehicle == false or vehicle == nil) then return end
 
         if(isElement(previewVehicle)) then destroyElement(previewVehicle) end
         
         local vehicleXOffset = 3
-        previewVehicle = createVehicle(vehicle.modelId, previewX + vehicleXOffset, previewY, previewZ, previewRot, 0, 0, "CAR SHOP")
+        previewVehicle = createVehicle(vehicle.modelId, previewX + vehicleXOffset, previewY, previewZ + 1, previewRot, 0, 0, "CAR SHOP")
         setVehicleColor(previewVehicle, r1, g1, b1, r2, g2, b2, r3, g3, b3, r3, g3, b3)
         setElementFrozen(previewVehicle, true)
         setElementFrozen(getPedOccupiedVehicle(localPlayer) or localPlayer, true)

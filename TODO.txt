@@ -56,16 +56,16 @@ Painel no qual o usuário pode acessar
 	OK - Abrir somente quando logado
 	OK - Menu de emotes
 	OK - No inicio faz um get pro server side para trazer os resources carregados, os que não vierem desabilita os menus, 
-	- Menu de carros
-	- Menu de skins
-	- Menu de efeitos (gravidade baixa, correr rápido, crab mode)
-	e mover lógicas de integração para os resources especificos
+	OK - mover lógicas de integração para os resources especificos
+	OK - Menu de carros
+	PENDENTE - Menu de skins
+	PENDENTE - Menu de efeitos (gravidade baixa, correr rápido, crab mode)
 	
 f_car_shop
-PENDENTE - Permitir comprar um carro e trocar a cor no momento da compra https://wiki.multitheftauto.com/wiki/CreateVehicle
+OK - Permitir comprar um carro e trocar a cor no momento da compra https://wiki.multitheftauto.com/wiki/CreateVehicle
 PENDENTE - trocar a cor e customizar https://wiki.multitheftauto.com/wiki/GetVehicleCompatibleUpgrades https://wiki.multitheftauto.com/wiki/AddVehicleUpgrade
 
 
 f_persistent_player_data
 OK - Persistir vida, colete, dinheiro, armas e localização (preparar para no futuro persistir residências e carros)
-PENDENTE - Skin padrão não funciona, ta vindo CJ
+OK - Skin padrão não funciona, ta vindo CJ

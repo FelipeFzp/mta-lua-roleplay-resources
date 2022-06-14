@@ -130,16 +130,16 @@ ACTIONS_BUTTONS[3] = {
 
             -- LIST
             local carsList = guiCreateGridList(0.05, 0.22, 0.9, 0.65, true, ACTIONS_PANEL_2)
-            guiGridListAddColumn(carsList, "Nome", 0.5)
-            guiGridListAddColumn(carsList, "Modelo", 0.5)
+            guiGridListAddColumn(carsList, "Veículo", 0.455)
+            guiGridListAddColumn(carsList, "Modelo", 0.455)
             for i, vehicle in pairs(vehicles) do
                 local row = guiGridListAddRow(carsList)
-                guiGridListSetItemText(carsList, row, 1, vehicle.model, false, false)
+                guiGridListSetItemText(carsList, row, 1, vehicle.modelName, false, false)
                 guiGridListSetItemText(carsList, row, 2, vehicle.name, false, false)
             end
             local function spawnSelectedVehicle()
                 local row = guiGridListGetSelectedItem(carsList)
-                triggerServerEvent("spawnVehicle", localPlayer, vehicles[row + 1].id)
+                triggerServerEvent("spawnCarShopVehicle", localPlayer, vehicles[row + 1].id)
                 toggleActionsPanel()
             end
 

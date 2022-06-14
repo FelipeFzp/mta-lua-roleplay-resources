@@ -73,18 +73,6 @@ local function loadCurrentEmote(loggedAccount)
     end)
 end
 
-local function handleSpawnVehicle(vehicleId)
-    if(isPedInVehicle(source)) then return end
-    
-    local x, y, z = getElementPosition(source)
-    local rx, ry, rz = getElementRotation(source)
-    local veh = createVehicle(vehicleId, 0, 0, 0)
-    spawnVehicle(veh, x, y, z, rx, ry, rz)
-    warpPedIntoVehicle(source, veh, 0)
-end
-addEvent("spawnVehicle", true)
-addEventHandler("spawnVehicle", getRootElement(), handleSpawnVehicle)
-
 local function handlePlayerLogin(guestAccount, loggedAccount)
     loadCurrentEmote(loggedAccount)
     
