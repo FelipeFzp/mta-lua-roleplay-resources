@@ -1,16 +1,19 @@
 <meta>
   <info author="Felipe Panassol Zaniol" description="A jobs and professions resource developed by me to learn LUA language" />
-  <min_mta_version server="1.5.8-9.20740" client="1.5.8-9.20740" />
+  <min_mta_version client="1.5.8-9.20740" />
 
   <script src="jobs_db_server.lua" type="server"/>
   <script src="jobs_server.lua" type="server"/>
   <script src="jobs_client.lua" type="client" cache="false"/>
 
-  <script src="doctor/job_server.lua" type="server"/>
   <script src="doctor/job_client.lua" type="client" cache="false"/>
+  <script src="doctor/job_server.lua" type="server"/>
 
-  <script src="plane/job_server.lua" type="server"/>
   <script src="plane/job_client.lua" type="client" cache="false"/>
+  <script src="plane/job_server.lua" type="server"/>
+  
+  <script src="firefighter/job_client.lua" type="client" cache="false"/>
+  <script src="firefighter/job_server.lua" type="server"/>
 
   <settings>
     <setting name="#job_container_prefix" value="job_" friendlyname="Prefixo dos elementos grupo das missões" group="Geral" desc="Prefixo para os ids dos grupos de elementos das quests" />

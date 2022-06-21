@@ -74,7 +74,7 @@ addEventHandler("onPlayerLogout", getRootElement(), handlePlayerLogout)
 function handleGetMarkerPosition(player, command, prefix)
     local x,y,z = getElementPosition(player) 
 
-    local ang = getPlayerRotation(player)
+    local ang = getElementRotation(player)
     local rx, ry, rz = x+math.sin(math.rad(-ang)), y+math.cos(math.rad(-ang)), z
     
     local marker = createMarker(rx, ry, rz - 1, "cylinder", 1.4, 0, 0, 240, 255, player)

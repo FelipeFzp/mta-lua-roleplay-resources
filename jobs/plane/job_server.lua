@@ -275,8 +275,7 @@ local function handlePlaneJob(job)
     questContainer = createElement("planeJob", questContainerId)
     
     local quests = {}
-    -- quests[1] = deliveryPackageQuest
-    quests[1] = airdropPackagesQuest
+    quests[1] = deliveryPackageQuest
     quests[2] = airdropPackagesQuest
 
     local level = job.currentLevel
