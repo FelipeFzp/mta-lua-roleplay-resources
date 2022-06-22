@@ -39,8 +39,9 @@ OK - Não abrir janela de outra missão quando já estiver em uma
 		Ideias para agora:
 			OK - Adicionar tempo
 			OK - Criar missão com caminhão de incêndio
-			PENDENTE - Criar missão com extintor de incêndio (Dar exintor)
+			OK - Criar missão com extintor de incêndio (Dar exintor)
 			PENDENTE - Cria pontos de incendios ROAD_ACCIDENT, FLORESTAL_ACCIDENT, HOUSE_ACCIDENT
+			PENDENTE - Tratar para caso não tenha lista de coordenadas manter as originais, é o caso das HOUSE_ACCIDENT
 		Ideias futuras:
 			Missões aleatórias via rádio
 	job_garbage_client

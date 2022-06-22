@@ -5,8 +5,8 @@ FIRE_SPOTS_BY_ZONE["Las Venturas"] = {}
 FIRE_SPOTS_BY_ZONE["San Fierro"] = {}
 FIRE_SPOTS_BY_ZONE["Red County"] = {
     ROAD_ACCIDENT = { "30,-18,2", "-30, 18, 2" },
-    FLORESTAL_ACCIDENT = {},
-    HOUSE_ACCIDENT = {}
+    FLORESTAL_ACCIDENT = { "30,-18,2", "-30, 18, 2" },
+    HOUSE_ACCIDENT = {} --THIS USE THE SELF OBJECT POSITIONS, DON'T HAVE SPECIFIC TARGET LOCATION
 }
 FIRE_SPOTS_BY_ZONE["Whetstone"] = {}
 FIRE_SPOTS_BY_ZONE["Flint County"] =  FIRE_SPOTS_BY_ZONE["Whetstone"]
@@ -39,7 +39,7 @@ local function firetruckExtinguishQuest(container, player, job)
     local mainElement = getElementsByType("marker", accidentContainer)[1]
     local px, py, pz = getElementPosition(player)
     local zoneName = getZoneName(px, py, pz, true)
-    local accidentPositionsByZoneAndCategory = FIRE_SPOTS_BY_ZONE[zoneName][accidentCategory]
+    local accidentPositionsByZoneAndCategory = FIRE_SPOTS_BY_ZONE[zoneName][accidentCategory] --TODO: tratar para caso não tiver coordenadas mantem as originais
     local targetX, targetY, targetZ = accidentPositionsByZoneAndCategory[math.random(1, #accidentPositionsByZoneAndCategory)]:match("([^,]+),([^,]+),([^,]+)")
 
     --MOVE ELEMENTS TO TARGET POSITION
@@ -134,7 +134,7 @@ local function fireExtinguisherQuest(container, player, job)
     local mainElement = getElementsByType("marker", accidentContainer)[1]
     local px, py, pz = getElementPosition(player)
     local zoneName = getZoneName(px, py, pz, true)
-    local accidentPositionsByZoneAndCategory = FIRE_SPOTS_BY_ZONE[zoneName][accidentCategory]
+    local accidentPositionsByZoneAndCategory = FIRE_SPOTS_BY_ZONE[zoneName][accidentCategory] --TODO: tratar para caso não tiver coordenadas mantem as originais
     local targetX, targetY, targetZ = accidentPositionsByZoneAndCategory[math.random(1, #accidentPositionsByZoneAndCategory)]:match("([^,]+),([^,]+),([^,]+)")
 
     --MOVE ELEMENTS TO TARGET POSITION
