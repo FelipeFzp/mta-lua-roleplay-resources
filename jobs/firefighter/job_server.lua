@@ -103,8 +103,99 @@ local function firetruckExtinguishQuest(container, player, job)
     addEventHandler("firetruckExtinguishQuestTimesEnd", player, onTimesEnd)
 end
 
+addEvent("onPedHitByFireExtinguisher", true)
+addEvent("fireExtinguisherQuestTimesEnd", true)
 local function fireExtinguisherQuest(container, player, job)
-    -- COPIAR A OUTRA E ALTERAR PARA SER COM EXTINTOR DE INCÊNDIO
+    outputChatBox("Utilizando o exintor de incêndio apague urgentemente o incêndio indicado no mapa.", player, 255, 255, 255, true)
+
+    --GIVE PLAYER WEAPON
+    local playerWeaponId = getPedWeapon(player, 9)
+    if(playerWeaponId ~= getWeaponIDFromName("fire extinguisher") or playerWeaponId == getWeaponIDFromName("fire extinguisher") and getPedTotalAmmo(player, 9) < 500) then
+        giveWeapon(player, getWeaponIDFromName("fire extinguisher"), 1000, true)
+    end
+
+    -- LOAD RANDOM ACCIDENT SCENARIO
+    local accidentContainer = createElement("firefighter_accident"..getAccountID(getPlayerAccount(player)))
+    setElementParent(accidentContainer, container)
+    local map = xmlLoadFile("firefighter/firefighter_spots_base_map.xml") 
+    local accident = xmlFindChild(map, "marker", math.random(0, (#xmlNodeGetChildren(map) - 1))) 
+    local accidentCategory = xmlNodeGetAttribute(accident, "category")
+    if not accidentCategory then 
+        accidentCategory = "ROAD_ACCIDENT"
+        outputServerLog("Accident with missing category, assigning default category: "..accidentCategory)
+    end
+	if (accident) then
+		loadMapData(accident, accidentContainer)
+		xmlUnloadFile(map)
+	end
+
+    --GET NEAR ACCIDENT BY CATEGORY
+    local mainElement = getElementsByType("marker", accidentContainer)[1]
+    local px, py, pz = getElementPosition(player)
+    local zoneName = getZoneName(px, py, pz, true)
+    local accidentPositionsByZoneAndCategory = FIRE_SPOTS_BY_ZONE[zoneName][accidentCategory]
+    local targetX, targetY, targetZ = accidentPositionsByZoneAndCategory[math.random(1, #accidentPositionsByZoneAndCategory)]:match("([^,]+),([^,]+),([^,]+)")
+
+    --MOVE ELEMENTS TO TARGET POSITION
+    local mainElementX, mainElementY, mainElementZ = getElementPosition(mainElement)
+    for k, element in ipairs(getElementChildren(mainElement)) do
+        setElementParent(element, accidentContainer)
+        local elementX, elementY, elementZ = getElementPosition(element)
+        local offsetX, offsetY, offsetZ = elementX - mainElementX, elementY - mainElementY, elementZ - mainElementZ
+
+        setElementPosition(element, targetX + offsetX, targetY + offsetY, targetZ + offsetZ)
+        setTimer(function() setElementFrozen(element, true) end, 2000, 1)
+    end
+    setElementAlpha(mainElement, 0)
+
+    -- LISTEN FOR ALL FIRES EXTINGUISHED
+    local function handleAllFiresExtinguished()
+        destroyElement(container)
+        outputChatBox("Você controlou o incêndio e evitou danos maiores.", player, 0, 240, 0, true)
+        local totalReward = get("extinguisher_extinguish_quest_reward") + (get("extinguisher_extinguish_quest_reward") * job.currentLevel * get("firefighter_level_bonus_multiplier"))
+        outputChatBox("Serviço concluido! +$"..totalReward, player, 0, 240, 0, true)
+        triggerEvent("doneQuest", player, totalReward, job.jobTriggerName)
+        triggerClientEvent(player, "toggleMissionTimer", player)
+    end
+
+    --ADD FIRE PEDS EVENTS LISTENER
+    local extinguishedFiresCount = 0
+    local function addPedHitByExtinguisherHandler(dummyPed, totalFiresCount)
+        local dummyPedFireTimer = setTimer(function() setPedOnFire(dummyPed, true) end, 2000, 0)
+        addEventHandler("onElementDestroy", dummyPed, function() if isTimer(dummyPedFireTimer) then killTimer(dummyPedFireTimer) end end)
+
+        addEventHandler("onPedHitByFireExtinguisher", dummyPed, function()
+            if isElement(dummyPed) then destroyElement(dummyPed) end
+            if isTimer(dummyPedFireTimer) then killTimer(dummyPedFireTimer) end
+
+            extinguishedFiresCount = extinguishedFiresCount + 1
+            if(extinguishedFiresCount == totalFiresCount) then
+                handleAllFiresExtinguished()
+            end
+        end)
+        triggerClientEvent(player, "listenPedHitByFireExtinguisher", player, dummyPed)
+    end
+
+    --REPLACE PEDS WITH MODELID 0 TO FIRE 
+    local elementsToReplace = getElementsByType("ped", accidentContainer)
+    for k, dummyPed in ipairs(elementsToReplace) do 
+        if getElementModel(dummyPed) == 0 then 
+            setElementAlpha(dummyPed, 0)
+            setElementFrozen(dummyPed, true)
+            
+            addPedHitByExtinguisherHandler(dummyPed, #elementsToReplace)
+        end
+    end
+
+    -- LISTEN FOR TIMER
+    triggerClientEvent(player, "toggleMissionTimer", player, "Tempo restante ", 300, 60, "fireExtinguisherQuestTimesEnd")
+    local function onTimesEnd()
+        removeEventHandler("fireExtinguisherQuestTimesEnd", player, onTimesEnd)
+        outputChatBox("Você demorou demais, o incêndio causou mais danos do que o esperado.", player, 240, 0, 0, true)
+        outputChatBox("Serviço fracassado!", player, 240, 0, 0, true)
+        destroyElement(container)
+    end
+    addEventHandler("fireExtinguisherQuestTimesEnd", player, onTimesEnd)
 end
 
 -- HANDLERS
@@ -122,8 +213,8 @@ local function handleFirefighterJob(job)
     end
     questContainer = createElement("firefighterJob", questContainerId)
     local quests = {}
-    quests[1] = firetruckExtinguishQuest
-    -- quests[2] = fireExtinguisherQuest
+    quests[1] = fireExtinguisherQuest
+    quests[2] = firetruckExtinguishQuest
 
     local level = job.currentLevel
     if(level > #quests) then level = #quests end
