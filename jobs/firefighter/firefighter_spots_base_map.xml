@@ -1,5 +1,5 @@
 <map edf:definitions="editor_main">
-    <marker id="ROAD_ACCIDENT_1" type="cylinder" color="#0000ffff" size="1" interior="0" dimension="0" alpha="255" posX="0" posY="0" posZ="2" rotX="0" rotY="0" rotZ="0">
+    <marker id="ROAD_ACCIDENT_1" category="ROAD_ACCIDENT" type="cylinder" color="#0000ffff" size="1" interior="0" dimension="0" alpha="255" posX="0" posY="0" posZ="2" rotX="0" rotY="0" rotZ="0">
         <vehicle id="vehicle (Camper) (1)" sirens="false" landingGearDown="false" locked="true" plate="WOIQ QMU" paintjob="0" dimension="0" interior="0" health="1000" alpha="255" model="483" collisions="true" frozen="false" posX="-2.9" posY="0.4" posZ="3.2" rotX="0" rotY="0" rotZ="246.25" color="254,254,254,254,254,254,254,254,254,0,0,0"></vehicle>
         <vehicle id="vehicle (DFT-30) (1)" sirens="false" landingGearDown="false" locked="true" plate="RN3V Y8R" paintjob="3" dimension="0" interior="0" health="1000" alpha="255" model="578" collisions="true" frozen="false" posX="2.1" posY="-0.6" posZ="3.9" rotX="0" rotY="0" rotZ="40" color="254,254,254,245,245,245,0,0,0,0,0,0"></vehicle>
         <ped id="ped (1)" interior="0" rotZ="0.003" dimension="0" model="0" health="100" armor="0" collisions="true" alpha="255" frozen="false" posX="-0.1" posY="-0.7" posZ="3.1" rotX="0" rotY="0"></ped>

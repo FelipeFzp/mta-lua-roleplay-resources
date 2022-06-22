@@ -236,4 +236,4 @@ local function cancelDoctorJob(player)
     destroyElement(questContainer)
     outputChatBox("O serviço que estava em andamento foi cancelado com sucesso.", player, 255, 255, 255, true)
 end
-addCommandHandler("cancelarServico", cancelDoctorJob)
+addCommandHandler("cancelarServico", cancelDoctorJob, false, false)

@@ -85,7 +85,8 @@ function handleResourceStart()
         if(playerAccount == false or isGuestAccount(playerAccount)) then return end
 
         local job = getPlayerCurrentJob(getAccountID(playerAccount))
-        setTimer(function() createPlayerJobBlips(player, job) end, 2000, 1)
+        local questContainerId = get("job_container_prefix")..getAccountID(playerAccount)
+        setTimer(function() createPlayerJobBlips(player, job, questContainerId) end, 2000, 1)
     end
 
     local map = xmlLoadFile("jobs_base_map.xml", true)

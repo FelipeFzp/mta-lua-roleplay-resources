@@ -37,9 +37,10 @@ OK - Não abrir janela de outra missão quando já estiver em uma
 			OK - Criar rotas dos airdrops
 	job_firefighter_client
 		Ideias para agora:
-			Adicionar tempo
-			Cria pontos de incendios
-			Dar exintor
+			OK - Adicionar tempo
+			OK - Criar missão com caminhão de incêndio
+			PENDENTE - Criar missão com extintor de incêndio (Dar exintor)
+			PENDENTE - Cria pontos de incendios ROAD_ACCIDENT, FLORESTAL_ACCIDENT, HOUSE_ACCIDENT
 		Ideias futuras:
 			Missões aleatórias via rádio
 	job_garbage_client
@@ -58,6 +59,7 @@ Painel no qual o usuário pode acessar
 	OK - No inicio faz um get pro server side para trazer os resources carregados, os que não vierem desabilita os menus, 
 	OK - mover lógicas de integração para os resources especificos
 	OK - Menu de carros
+	PENDENTE - Menu de conta bancária (permitir transferencias entre players próximos ou do servidor, validar saldo)
 	PENDENTE - Menu de skins
 	PENDENTE - Menu de efeitos (gravidade baixa, correr rápido, crab mode)
 	

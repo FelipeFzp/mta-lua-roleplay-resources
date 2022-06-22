@@ -25,5 +25,9 @@
     <setting name="*plane_level_bonus_multiplier" value="0.5" friendlyname="Multiplicador de recompensa" desc="Multiplicador de recompensa por nivel" group="Piloto" />
     <setting name="*delivery_package_quest_reward" value="1000" friendlyname="Recompensa Entregar Pacote" desc="Recompensa base da missão 'Entregar Pacote' (Reinício do recurso obrigatório)" group="Piloto" />
     <setting name="*airdrop_packages_quest_reward" value="1800" friendlyname="Recompensa Airdrop de Pacotes" desc="Recompensa base da missão 'Airdrop de Pacotes' (Reinício do recurso obrigatório)" group="Piloto" />
+    
+    <setting name="*firefighter_level_bonus_multiplier" value="0.5" friendlyname="Multiplicador de recompensa" desc="Multiplicador de recompensa por nivel" group="Bombeiro" />
+    <setting name="*firetruck_extinguish_quest_reward" value="1000" friendlyname="Recompensa Caminhão de Bombeiros" desc="Recompensa base da missão 'Apagar incêndio com caminhão de bombeiros' (Reinício do recurso obrigatório)" group="Bombeiro" />
+    <setting name="*extinguisher_extinguish_quest_reward" value="1800" friendlyname="Recompensa Extintor de incêndio" desc="Recompensa base da missão 'Apagar incêndio com exintor de incêndio' (Reinício do recurso obrigatório)" group="Bombeiro" />
   </settings>
 </meta>

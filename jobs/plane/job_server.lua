@@ -297,5 +297,5 @@ local function cancelPlaneJob(player)
     destroyElement(questContainer)
     outputChatBox("O serviço que estava em andamento foi cancelado com sucesso.", player, 255, 255, 255, true)
 end
-addCommandHandler("cancelarServico", cancelPlaneJob)
+addCommandHandler("cancelarServico", cancelPlaneJob, false, false)
 
