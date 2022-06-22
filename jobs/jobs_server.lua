@@ -180,3 +180,18 @@ local function handleGetCurrentJob()
 end
 addEvent("getPlayerCurrentJob", true)
 addEventHandler("getPlayerCurrentJob", getRootElement(), handleGetCurrentJob)
+
+
+local function handleSpawnJobVehicle(modelId)
+    local player = source
+    if(isPedInVehicle(player)) then return end
+
+    local x, y, z = getElementPosition(player)
+    local rx, ry, rz = getElementRotation(player)
+
+    local veh = createVehicle(modelId, 0, 0, 0)
+    spawnVehicle(veh, x, y, z, rx, ry, rz)
+    warpPedIntoVehicle(player, veh, 0)
+end
+addEvent("spawnJobVehicle", true)
+addEventHandler("spawnJobVehicle", getRootElement(), handleSpawnJobVehicle)

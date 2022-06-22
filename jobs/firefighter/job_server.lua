@@ -17,7 +17,8 @@ FIRE_SPOTS_BY_ZONE["Unknown"] = FIRE_SPOTS_BY_ZONE["Los Santos"]
 addEvent("onPedHitByWaterCannon", true)
 addEvent("firetruckExtinguishQuestTimesEnd", true)
 local function firetruckExtinguishQuest(container, player, job)
-    outputChatBox("Utilizando o canhão de água de caminhão de bombeiros apague urgentemente o incêndio indicado no mapa.", player, 255, 255, 255, true)
+    outputChatBox("Utilizando o canhão de água de um caminhão de bombeiros apague urgentemente o incêndio indicado no mapa.", player, 255, 255, 255, true)
+    outputChatBox("Utilize o menu de emprego pressionando X para solicitar um caminhão de bombeiros.", player, 255, 255, 255, true)
 
     -- LOAD RANDOM ACCIDENT SCENARIO
     local accidentContainer = createElement("firefighter_accident"..getAccountID(getPlayerAccount(player)))

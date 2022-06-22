@@ -97,7 +97,8 @@ end
 addEvent("rescuePatientQuestPedEnterVehicle", true)
 addEvent("rescuePatientQuestTimesEnd", true)
 local function rescuePatientQuest(container, player, job)
-    outputChatBox("Busque o paciente indicado no mapa e leve-o para o hospital", player, 255, 255, 255, true)
+    outputChatBox("Utilizando uma ambulância, busque o paciente indicado no mapa e leve-o para o hospital", player, 255, 255, 255, true)
+    outputChatBox("Utilize o menu de emprego pressionando X para solicitar uma ambulância.", player, 255, 255, 255, true)
 
     -- SPAWN PED WITH BLIP AND MARKER
     local playerX, playerY, playerZ = getElementPosition(player)

@@ -30,7 +30,7 @@ ACTIONS_BUTTONS[1] = {
             if(currentJob ~= nil and currentJob.jobVehicleId > 0) then
                 addEventHandler("onClientGUIClick", 
                     guiCreateButton(0.6, 0.1, 0.45, 0.1, "Solicitar veículo", true, ACTIONS_PANEL_2), function() 
-                        triggerServerEvent("spawnVehicle", localPlayer, currentJob.jobVehicleId)
+                        triggerServerEvent("spawnJobVehicle", localPlayer, currentJob.jobVehicleId)
                         toggleActionsPanel()
                     end)
             end
