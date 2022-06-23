@@ -237,3 +237,68 @@ local function cancelFirefighterJob(player)
     outputChatBox("O serviço que estava em andamento foi cancelado com sucesso.", player, 255, 255, 255, true)
 end
 addCommandHandler("cancelarServico", cancelFirefighterJob, false, false)
+
+
+addCommandHandler("putScenario", function(player, command, scenarioId)
+    --REPLACE _ FOR SPACE
+    scenarioId = scenarioId:gsub("_", " ")
+    
+    local containerId = getAccountID(getPlayerAccount(player))..scenarioId
+    local container = getElementByID(containerId)
+    if isElement(container) then 
+        destroyElement(container)
+        return
+    end
+
+    --LOAD MAP
+    local map = xmlLoadFile("firefighter/firefighter_spots_base_map.xml") 
+    local accidents = xmlNodeGetChildren(map) 
+
+    local accident = nil
+    for k, el in ipairs(accidents) do
+        if(xmlNodeGetAttribute(el, "id") == scenarioId) then
+            accident = el
+            break
+        end
+    end
+    
+    local container = createElement("accidentContainer", containerId)
+    local accidentCategory = xmlNodeGetAttribute(accident, "category")
+	if (accident) then
+		loadMapData(accident, container)
+		xmlUnloadFile(map)
+    else
+        outputChatBox("Não foi possível encontrar o element "..scenarioId, player, 240, 0, 0, true)
+	end
+
+    --REPLACE PEDS WITH MODELID 0 TO FIRE 
+    local elementsToReplace = getElementsByType("ped", container)
+    for k, dummyPed in ipairs(elementsToReplace) do 
+        if getElementModel(dummyPed) == 0 then 
+            setElementAlpha(dummyPed, 0)
+            setElementFrozen(dummyPed, true)
+            local dummyPedFireTimer = setTimer(function() setPedOnFire(dummyPed, true) end, 2000, 0)
+            addEventHandler("onElementDestroy", dummyPed, function() if isTimer(dummyPedFireTimer) then killTimer(dummyPedFireTimer) end end)
+        end
+    end
+
+    --MOVE ELEMENTS TO TARGET POSITION
+    local mainElement = getElementsByType("marker", container)[1]
+    local targetX, targetY, targetZ = getElementPosition(player)
+    
+    targetZ = targetZ - 1
+    local mainElementX, mainElementY, mainElementZ = getElementPosition(mainElement)
+    for k, element in ipairs(getElementChildren(mainElement)) do
+        setElementParent(element, container)
+        local elementX, elementY, elementZ = getElementPosition(element)
+        local offsetX, offsetY, offsetZ = elementX - mainElementX, elementY - mainElementY, elementZ - mainElementZ
+
+        setElementPosition(element, targetX + offsetX, targetY + offsetY, targetZ + offsetZ)
+        setTimer(function() setElementFrozen(element, true) end, 2000, 1)
+    end
+    
+    local instruction = "["..getElementZoneName(mainElement, true).."]:"..accidentCategory.." - "..targetX..","..targetY..","..targetZ
+    triggerClientEvent(player, "copyToClipboard", player, instruction)
+
+    setElementPosition(player, targetX + 5, targetY + 5, targetZ + 2)
+end, false, false)

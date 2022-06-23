@@ -1,0 +1,5 @@
+addEvent("copyToClipboard", true)
+addEventHandler("copyToClipboard", localPlayer, function(text)
+    outputChatBox("Copied to clipboard: " .. text)
+    setClipboard(text)
+end)
