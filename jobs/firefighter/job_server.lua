@@ -150,6 +150,7 @@ local function firetruckExtinguishQuest(container, player, job)
 
     -- LISTEN FOR ALL FIRES EXTINGUISHED
     local function handleAllFiresExtinguished()
+        triggerClientEvent(player, "fadeScreen", player, 1.5)
         destroyElement(container)
         outputChatBox("Você controlou o incêndio e evitou danos maiores.", player, 0, 240, 0, true)
         local totalReward = get("firetruck_extinguish_quest_reward") + (get("firetruck_extinguish_quest_reward") * job.currentLevel * get("firefighter_level_bonus_multiplier"))
@@ -205,8 +206,8 @@ local function fireExtinguisherQuest(container, player, job)
 
     --GIVE PLAYER WEAPON
     local playerWeaponId = getPedWeapon(player, 9)
-    if(playerWeaponId ~= getWeaponIDFromName("fire extinguisher") or playerWeaponId == getWeaponIDFromName("fire extinguisher") and getPedTotalAmmo(player, 9) < 1500) then
-        giveWeapon(player, getWeaponIDFromName("fire extinguisher"), 1500 - getPedTotalAmmo(player, 9), true)
+    if(playerWeaponId ~= getWeaponIDFromName("fire extinguisher") or playerWeaponId == getWeaponIDFromName("fire extinguisher") and getPedTotalAmmo(player, 9) < 1000) then
+        giveWeapon(player, getWeaponIDFromName("fire extinguisher"), 1000 - getPedTotalAmmo(player, 9), true)
     end
 
     -- LOAD RANDOM ACCIDENT SCENARIO
@@ -249,6 +250,7 @@ local function fireExtinguisherQuest(container, player, job)
 
     -- LISTEN FOR ALL FIRES EXTINGUISHED
     local function handleAllFiresExtinguished()
+        triggerClientEvent(player, "fadeScreen", player, 1.5)
         destroyElement(container)
         outputChatBox("Você controlou o incêndio e evitou danos maiores.", player, 0, 240, 0, true)
         local totalReward = get("extinguisher_extinguish_quest_reward") + (get("extinguisher_extinguish_quest_reward") * job.currentLevel * get("firefighter_level_bonus_multiplier"))

@@ -20,7 +20,9 @@ OK - Não deixar trocar de emprego se estiver com missão em progresso
 OK - On resource start criar blips e markers dos empregos dos jogadores
 OK - Ao entrar no server criar blip no mapa com a profissão atual
 OK - Melhorar mensagens da troca de emprego
-OK - Não abrir janela de outra missão quando já estiver em uma     
+OK - Não abrir janela de outra missão quando já estiver em uma   
+OK - Fazer fades no final das missões, para ficar mais amigavel  
+
 	job_doctor_client
 		Ideias para agora:
 			OK - Adicionar tempo

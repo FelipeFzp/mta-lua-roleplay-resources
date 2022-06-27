@@ -59,6 +59,8 @@ end
 addEvent("handlePlayerBuyCar", true)
 addEventHandler("handlePlayerBuyCar", getRootElement(), handlePlayerBuyCar)
 
+local priceDividerFactor = tonumber(get("price_divide_factor"))
+local minVehiclePrice = tonumber(get("min_vehicle_price"))
 local function createPlayerCarShops(player)
     local loggedAccount = getPlayerAccount(player)
     if(isGuestAccount(loggedAccount)) then return end
@@ -84,6 +86,9 @@ local function createPlayerCarShops(player)
                     local dummyVehicle = createVehicle(vehicle.modelId, 0, 0, 0)
                     vehicle.category = getVehicleType(dummyVehicle)
                     destroyElement(dummyVehicle)
+
+                    if priceDividerFactor >= 0 then vehicle.price = math.floor(vehicle.price / priceDividerFactor) end
+                    if vehicle.price < minVehiclePrice then vehicle.price = minVehiclePrice end
                 end
                 table.sort(vehicles, function(a, b) return a.category < b.category or (a.category == b.category and a.modelName < b.modelName) end);
 

@@ -191,3 +191,14 @@ local function toggleMissionTimer(label, timeInSeconds, hurryTime, finishTrigger
 end
 addEvent('toggleMissionTimer', true)
 addEventHandler('toggleMissionTimer', localPlayer, toggleMissionTimer)
+
+local function handleFadeScreen(timeInSeconds)
+    if(timeInSeconds <= 0.3) then timeInSeconds = 0.4 end
+
+    fadeCamera(false, 0.3)
+    setTimer(function()
+        fadeCamera(true, 0.3)
+    end, timeInSeconds * 1000, 1)
+end
+addEvent("fadeScreen", true)
+addEventHandler("fadeScreen", localPlayer, handleFadeScreen)

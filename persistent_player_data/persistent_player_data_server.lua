@@ -7,28 +7,26 @@ local INITIAL_SKINS = {
 }
 
 function handlePlayerLogout(playerAccount, player)
-    if player == nil then player = source end
-
-    local health = getElementHealth(player)
+    local health = getElementHealth(player or source)
     if(health <= 0) then health = 100 end
     setAccountData(playerAccount, HEALTH_KEY, health);
 
-    local armor = getPedArmor(player)
+    local armor = getPedArmor(player or source)
     setAccountData(playerAccount, ARMOR_KEY, armor);
 
-    local money = getPlayerMoney(player)
+    local money = getPlayerMoney(player or source)
     setAccountData(playerAccount, MONEY_KEY, money);
 
-    local weapons = getPlayerWeapons(player)
+    local weapons = getPlayerWeapons(player or source)
     setAccountData(playerAccount, WEAPONS_KEY, weapons);
 
-    local weaponSlot = getPedWeaponSlot(player)
+    local weaponSlot = getPedWeaponSlot(player or source)
     setAccountData(playerAccount, WEAPON_SLOT_KEY, weaponSlot);
 
-    local position = getPlayerPosition(player)
+    local position = getPlayerPosition(player or source)
     setAccountData(playerAccount, POSITION_KEY, position);
 
-    local skin = getElementModel(player)
+    local skin = getElementModel(player or source)
     setAccountData(playerAccount, SKIN_KEY, skin);
 end
 addEvent("persistPlayerData", true)
@@ -40,7 +38,9 @@ addEventHandler("onPlayerQuit", getRootElement(), function()
     local playerAccount = getPlayerAccount(source)
     handlePlayerLogout(playerAccount, source)
 end)
-addEventHandler("onPlayerLogout", getRootElement(), handlePlayerLogout)
+addEventHandler("onPlayerLogout", getRootElement(), function(loggedOffAccount)
+    handlePlayerLogout(loggedOffAccount, source)
+end)
 
 function handlePlayerLogin()
     local player = source

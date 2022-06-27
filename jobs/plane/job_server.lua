@@ -91,6 +91,7 @@ local function deliveryPackageQuest(container, player, job)
         end
 
         if(isTimer(underWaterTimerCheck)) then killTimer(underWaterTimerCheck) end
+        triggerClientEvent(player, "fadeScreen", player, 1.5)
         local totalReward = get("delivery_package_quest_reward") + (get("delivery_package_quest_reward") * job.currentLevel * get("plane_level_bonus_multiplier"))
         outputChatBox("Você completou sua viagem com segurança. Serviço concluido! +$"..totalReward, player, 0, 240, 0, true)
         destroyElement(container)
@@ -213,6 +214,7 @@ local function airdropPackagesQuest(container, player, job)
                 return
             end
 
+            triggerClientEvent(player, "onAirdropMarkerHit", player)
             removeEventHandler("onMarkerHit", marker, handleMarkerHit)
             destroyElement(marker)
 
@@ -245,6 +247,7 @@ local function airdropPackagesQuest(container, player, job)
                 -- DESTROY PLANE IN n SECONDS
                 outputChatBox("Seu avião será devolvido em 60 segundos, pouse em um lugar seguro antes de ser ejetado", player, 240, 0, 0, true)
                 setTimer(function() 
+                    triggerClientEvent(player, "fadeScreen", player, 1.5)
                     if(isElement(planeContainer)) then destroyElement(planeContainer) end
                 end, 60000, 1)
                 return

@@ -1,3 +1,15 @@
+local function toCurrency(number)
+
+    local i, j, minus, int, fraction = tostring(number):find('([-]?)(%d+)([.]?%d*)')
+  
+    -- reverse the int-string and append a comma to all blocks of 3 digits
+    int = int:reverse():gsub("(%d%d%d)", "%1.")
+  
+    -- reverse the int-string back remove an optional comma and put the 
+    -- optional minus and fractional part back
+    return "R$ "..minus..int:reverse():gsub("^,", "")..fraction..",00"
+end
+
 local previewX, previewY, previewZ = 8, -18, 9994.5
 local previewRot = 0
 local previewVehicle;
@@ -31,7 +43,7 @@ local function handleOpenCarShopWindow(vehiclesToSell)
 
         local row = guiGridListAddRow(carsList)
         guiGridListSetItemText(carsList, row, 1, vehicle.modelName, false, false)
-        guiGridListSetItemText(carsList, row, 2, "R$ "..vehicle.price..",00", false, false)
+        guiGridListSetItemText(carsList, row, 2, toCurrency(vehicle.price), false, false)
         guiGridListSetItemData(carsList, row, 1, vehicle)
 
         if(i > 1) then previousIndex = previousIndex + 1 end
@@ -124,7 +136,7 @@ local function handleOpenCarShopWindow(vehiclesToSell)
     addEventHandler("onClientGUIClick", carsList, function() 
         local row, col = guiGridListGetSelectedItem(carsList)
         local vehicle = guiGridListGetItemData(carsList, row, 1)
-        guiSetText(priceLabel, "Preço: $"..vehicle.price..",00")
+        guiSetText(priceLabel, "Preço: "..toCurrency(vehicle.price))
         if(vehicle == false or vehicle == nil) then return end
 
         if(isElement(previewVehicle)) then destroyElement(previewVehicle) end
@@ -153,3 +165,4 @@ local function handleOpenCarShopWindow(vehiclesToSell)
 end
 addEvent("openCarShopWindow", true)
 addEventHandler("openCarShopWindow", getRootElement(), handleOpenCarShopWindow)
+

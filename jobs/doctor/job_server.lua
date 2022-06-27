@@ -73,6 +73,7 @@ local function healPatientQuest(container, player, job)
     -- LISTEN FOR HEAL PED
     triggerClientEvent(player, "listenHealPatientQuestFinish", player, ped)
     local function onFinish()
+        triggerClientEvent(player, "fadeScreen", player, 1.5)
         destroyElement(container)
         outputChatBox("Seu paciente está se sentindo melhor.", player, 0, 240, 0, true)
         local totalReward = get("heal_patient_quest_reward") + (get("heal_patient_quest_reward") * job.currentLevel * get("doctor_level_bonus_multiplier"))
@@ -181,6 +182,7 @@ local function rescuePatientQuest(container, player, job)
                 return 
             end
 
+            triggerClientEvent(player, "fadeScreen", player, 1.5)
             destroyElement(container)
             local totalReward = get("rescue_patient_quest_reward") + (get("rescue_patient_quest_reward") * job.currentLevel * get("doctor_level_bonus_multiplier"))
             outputChatBox("Seu paciente agora está seguro no hospital. Serviço concluido! +$"..totalReward, player, 0, 240, 0, true)
