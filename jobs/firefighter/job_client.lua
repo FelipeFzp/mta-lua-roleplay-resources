@@ -1,6 +1,20 @@
 local function handlePedHitByWaterCannon(ped)
+    local showAlert = true
+
     setPedVoice(ped, "PED_TYPE_DISABLED", nil)
-    addEventHandler("onClientPedDamage", ped, cancelEvent) 
+    addEventHandler("onClientPedDamage", ped, function(attacker, weaponId) 
+        local pedHitted = source
+        setElementHealth(pedHitted, 99999)
+        
+        if(pedHitted ~= ped) then return end
+        if(attacker ~= localPlayer) then return end
+        if(weaponId ~= getWeaponIDFromName("fire extinguisher")) then return end
+        if(not showAlert) then return end
+
+        outputChatBox("Você precisa utilizar o #FF0000caminhão de bombeiros#FFFFFF para apagar este incêndio.", 255, 255, 255, true)
+        showAlert = false
+        setTimer(function() showAlert = true end, 2000, 1)
+    end) 
     local function handlePedHitByWater(pedHitted)
         if(pedHitted ~= ped) then return end
         if(getVehicleOccupant(source) ~= localPlayer) then return end
@@ -16,13 +30,25 @@ addEventHandler("listenPedHitByWaterCannon", localPlayer, handlePedHitByWaterCan
 
 
 local function handlePedHitByFireExtinguisher(ped)
+    local showAlert = true
+
     setPedVoice(ped, "PED_TYPE_DISABLED", nil)
+    addEventHandler("onClientPedHitByWaterCannon", getRootElement(), function(pedHitted)
+        if(pedHitted ~= ped) then return end
+        if(getVehicleOccupant(source) ~= localPlayer) then return end
+        if(not showAlert) then return end
+
+        outputChatBox("Você precisa utilizar o #FF0000extintor de incêndio#FFFFFF para apagar este incêndio.", 255, 255, 255, true)
+        showAlert = false
+        setTimer(function() showAlert = true end, 2000, 1)
+    end)
     local function handlePedHit(attacker, weaponId)
         local pedHitted = source
-        if(pedHitted ~= ped) then cancelEvent() return end
-        if(attacker ~= localPlayer) then cancelEvent() return end
-        if(weaponId ~= getWeaponIDFromName("fire extinguisher")) then cancelEvent() return end
-        if(getElementHealth(ped) > 90) then return end
+        setElementHealth(pedHitted, 99999)
+
+        if(pedHitted ~= ped) then return end
+        if(attacker ~= localPlayer) then return end
+        if(weaponId ~= getWeaponIDFromName("fire extinguisher")) then return end
         
         removeEventHandler("onClientPedDamage", ped, handlePedHit) 
         triggerServerEvent("onPedHitByFireExtinguisher", pedHitted)

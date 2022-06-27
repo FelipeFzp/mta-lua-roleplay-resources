@@ -69,7 +69,7 @@ local function deliveryPackageQuest(container, player, job)
             local availableAirports = AIRPORTS_BY_ZONE[zoneName];
             airportCoordinates = availableAirports[math.random(1, #availableAirports)]
             ax, ay, az = airportCoordinates:match("([^,]+),([^,]+),([^,]+)")
-            outputChatBox("Destino: Aeroporto de " .. getZoneName(ax, ay, az, true).. ", vá até ponto indicado no mapa.", player, 255, 255, 255, true)
+            outputChatBox("[Missão] Destino para aeroporto de #FF0000" .. getZoneName(ax, ay, az, true).. "#FFFF00, vá até ponto indicado no mapa.", player, 255, 255, 0, true)
         end
     end
     local blip = createBlip(ax, ay, az, 0, 3, 240, 0, 0, 255, 0, 99999, player)
@@ -140,7 +140,7 @@ end
 
 addEvent("airdropPackagesQuestTimesEnd", true)
 local function airdropPackagesQuest(container, player, job)
-    outputChatBox("Vá até o ponto marcado para fazer a entrega aérea, os pontos serão marcados em sequência conforme as entregas são feitas.", player, 255, 255, 255, true)
+    outputChatBox("[Missão] Vá até o ponto marcado para fazer a entrega aérea, os pontos serão marcados em sequência conforme as entregas são feitas.", player, 255, 255, 0, true)
 
     -- CREATE PLANE BY LEVEL
     local level = job.currentLevel;
@@ -243,10 +243,10 @@ local function airdropPackagesQuest(container, player, job)
                 if(isTimer(underWaterTimerCheck)) then killTimer(underWaterTimerCheck) end
 
                 -- DESTROY PLANE IN n SECONDS
-                outputChatBox("Seu avião será devolvido em 30 segundos, pouse em um lugar seguro antes de ser ejetado", player, 240, 0, 0, true)
+                outputChatBox("Seu avião será devolvido em 60 segundos, pouse em um lugar seguro antes de ser ejetado", player, 240, 0, 0, true)
                 setTimer(function() 
                     if(isElement(planeContainer)) then destroyElement(planeContainer) end
-                end, 30000, 1)
+                end, 60000, 1)
                 return
             end
             createNextMarker()

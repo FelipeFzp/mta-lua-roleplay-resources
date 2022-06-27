@@ -1,6 +1,6 @@
 local function handleSpawnVehicle(vehicleId)
     local player = source
-    if(isPedInVehicle(player)) then return end
+    if(isPedInVehicle(player)) then destroyElement(getPedOccupiedVehicle(player)) end
 
     local x, y, z = getElementPosition(player)
     local rx, ry, rz = getElementRotation(player)

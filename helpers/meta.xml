@@ -1,0 +1,6 @@
+<meta>
+     <info author="Felipe Panassol Zaniol" description="Some commands and handlers to help on development of another resources, developed by me to learn LUA language" />
+
+     <script src="helpers_client.lua" type="client" />
+     <script src="helpers_server.lua" type="server" />
+</meta>

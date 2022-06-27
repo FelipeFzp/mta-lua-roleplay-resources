@@ -1,0 +1,10 @@
+{
+  "Lua.diagnostics.globals": [
+    "addCommandHandler",
+    "addCommandHandler"
+  ],
+  "Lua.diagnostics.disable": [
+    "undefined-global",
+    "undefined-global"
+  ]
+}

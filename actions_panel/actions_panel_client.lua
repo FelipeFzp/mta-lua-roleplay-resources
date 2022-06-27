@@ -38,25 +38,25 @@ ACTIONS_BUTTONS[1] = {
             -- LABELS
             local currentJobLabel = "Desempregado";
             if (currentJob ~= nil) then currentJobLabel = currentJob.jobTitle end
-            guiCreateLabel(0.05, 0.1, 0.55, 0.4, "Emprego atual: ", true, ACTIONS_PANEL_2)
+            guiCreateLabel(0.05, 0.1, 0.55, 0.05, "Emprego atual: ", true, ACTIONS_PANEL_2)
             guiLabelSetColor(
-                guiCreateLabel(0.05, 0.145, 0.55, 0.4, currentJobLabel, true, ACTIONS_PANEL_2),
+                guiCreateLabel(0.05, 0.145, 0.55, 0.05, currentJobLabel, true, ACTIONS_PANEL_2),
                 200, 200, 200)
 
             local jobLevelLabel = "0";
             if (currentJob ~= nil) then jobLevelLabel = currentJob.levelTitle end
-            guiCreateLabel(0.05, 0.22, 0.95, 0.4, "Nivel do emprego atual: ", true, ACTIONS_PANEL_2)
+            guiCreateLabel(0.05, 0.22, 0.95, 0.05, "Nivel do emprego atual: ", true, ACTIONS_PANEL_2)
             guiLabelSetColor(
-                guiCreateLabel(0.05, 0.265, 0.95, 0.4, jobLevelLabel, true, ACTIONS_PANEL_2),
+                guiCreateLabel(0.05, 0.265, 0.95, 0.05, jobLevelLabel, true, ACTIONS_PANEL_2),
                 200, 200, 200)
                 
             local progressLabel = "Você não possui progresso como desempregado";
             if (currentJob ~= nil) then 
                 progressLabel = currentJob.levelProgress.."/"..currentJob.levelTotal 
             end
-            guiCreateLabel(0.05, 0.34, 0.95, 0.4, "Progresso de atividades: ", true, ACTIONS_PANEL_2)
+            guiCreateLabel(0.05, 0.34, 0.95, 0.05, "Progresso de atividades: ", true, ACTIONS_PANEL_2)
             guiLabelSetColor(
-                guiCreateLabel(0.05, 0.385, 0.95, 0.4, progressLabel, true, ACTIONS_PANEL_2),
+                guiCreateLabel(0.05, 0.385, 0.95, 0.05, progressLabel, true, ACTIONS_PANEL_2),
                 200, 200, 200)
 
             if(currentJob == nil) then 

@@ -23,6 +23,8 @@ local function handleDoneQuest(reward, jobTrigger)
             createPlayerJobBlips(source, currentJob, questContainerId) --Recreate blips with updated job level
         end
     end
+
+    triggerEvent("persistPlayerData", getRootElement(), source)
 end
 addEvent('doneQuest', true)
 addEventHandler('doneQuest', getRootElement(), handleDoneQuest)
@@ -195,3 +197,15 @@ local function handleSpawnJobVehicle(modelId)
 end
 addEvent("spawnJobVehicle", true)
 addEventHandler("spawnJobVehicle", getRootElement(), handleSpawnJobVehicle)
+
+addCommandHandler("setPlayerJobActivities", function(_, command, playerNickname, activitiesCount)
+    local player = getPlayerFromName(playerNickname)
+    local accountId = getAccountID(getPlayerAccount(player))
+
+    local currentJob = getPlayerCurrentJob(accountId)
+    executeSQLQuery(
+        " UPDATE f_player_jobs"..
+        " SET activitiesCount = "..activitiesCount..
+        " WHERE jobId = "..currentJob.jobId..
+        " AND accountId = "..accountId)
+end, false, false)

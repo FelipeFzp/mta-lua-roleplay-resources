@@ -40,6 +40,7 @@ OK - Não abrir janela de outra missão quando já estiver em uma
 			OK - Adicionar tempo
 			OK - Criar missão com caminhão de incêndio
 			OK - Criar missão com extintor de incêndio (Dar exintor)
+			OK - Melhorar instruções da missão de caminhão de bombeiros
 			PENDENTE - Cria pontos de incendios ROAD_ACCIDENT, FLORESTAL_ACCIDENT, HOUSE_ACCIDENT
 			PENDENTE - Tratar para caso não tenha lista de coordenadas manter as originais, é o caso das HOUSE_ACCIDENT
 		Ideias futuras:
@@ -63,6 +64,7 @@ Painel no qual o usuário pode acessar
 	PENDENTE - Menu de conta bancária (permitir transferencias entre players próximos ou do servidor, validar saldo)
 	PENDENTE - Menu de skins
 	PENDENTE - Menu de efeitos (gravidade baixa, correr rápido, crab mode)
+	PENDENTE - Botão para despawnar veiculos
 	
 f_car_shop
 OK - Permitir comprar um carro e trocar a cor no momento da compra https://wiki.multitheftauto.com/wiki/CreateVehicle

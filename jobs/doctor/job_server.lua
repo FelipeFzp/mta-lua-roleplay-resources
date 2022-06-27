@@ -31,12 +31,12 @@ PED_SPAWNS_BY_ZONE["Unknown"] = PED_SPAWNS_BY_ZONE["Los Santos"]
 addEvent("healPatientQuestFinish", true)
 addEvent("healPatientQuestTimesEnd", true)
 local function healPatientQuest(container, player, job)
-    outputChatBox("Vá até o ponto vermelho indicado no mapa e utilize o spray de medicamento no paciente", player, 255, 255, 255, true)
+    outputChatBox("[Missão] Vá até o ponto vermelho indicado no mapa e utilize o #FF0000spray de medicamento#FFFF00 no paciente", player, 255, 255, 0, true)
 
     -- GIVE QUEST WEAPON
     local playerWeaponId = getPedWeapon(player, 9)
-    if(playerWeaponId ~= getWeaponIDFromName("spraycan") or playerWeaponId == getWeaponIDFromName("spraycan") and getPedTotalAmmo(player, 9) < 100) then
-        giveWeapon(player, getWeaponIDFromName("spraycan"), 100, true)
+    if(playerWeaponId ~= getWeaponIDFromName("spraycan") or playerWeaponId == getWeaponIDFromName("spraycan") and getPedTotalAmmo(player, 9) < 200) then
+        giveWeapon(player, getWeaponIDFromName("spraycan"), 200 - getPedTotalAmmo(player, 9), true)
     end
 
     -- SPAWN PED WITH BLIP AND MARKER
@@ -97,8 +97,8 @@ end
 addEvent("rescuePatientQuestPedEnterVehicle", true)
 addEvent("rescuePatientQuestTimesEnd", true)
 local function rescuePatientQuest(container, player, job)
-    outputChatBox("Utilizando uma ambulância, busque o paciente indicado no mapa e leve-o para o hospital", player, 255, 255, 255, true)
-    outputChatBox("Utilize o menu de emprego pressionando X para solicitar uma ambulância.", player, 255, 255, 255, true)
+    outputChatBox("[Missão] Utilizando uma #FF0000ambulância#FFFF00, busque o paciente indicado no mapa e leve-o para o hospital", player, 255, 255, 0, true)
+    outputChatBox("Dica: Utilize o menu de emprego pressionando X para solicitar uma ambulância.", player, 255, 255, 255, true)
 
     -- SPAWN PED WITH BLIP AND MARKER
     local playerX, playerY, playerZ = getElementPosition(player)

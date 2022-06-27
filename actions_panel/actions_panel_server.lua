@@ -60,7 +60,7 @@ local function loadCurrentEmote(loggedAccount)
         local selectedIndex = getAccountData(loggedAccount, accountDataEmoteKey) or 1
         if(selectedIndex > #ANIMATIONS) then selectedIndex = #ANIMATIONS end
 
-        if(isPedOnGround(player)) then 
+        if(isPedOnGround(player) and not isPedInVehicle(player)) then 
             setPedAnimation(player, ANIMATIONS[selectedIndex][2], ANIMATIONS[selectedIndex][3], -1, ANIMATIONS[selectedIndex][4], true, true, false)
         end
     end)
