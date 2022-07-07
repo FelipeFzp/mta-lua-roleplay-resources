@@ -1,0 +1,69 @@
+<meta>
+	<info author="Felipe Panassol Zaniol" description="A map binded to a key resource developed by me to learn LUA language"/>
+
+	<file src="img/map.png" />
+	<file src="img/player_blip.png" />
+	
+	<file src="img/Blipid5.png" />
+	<file src="img/Blipid6.png" />
+	<file src="img/Blipid7.png" />
+	<file src="img/Blipid8.png" />
+	<file src="img/Blipid9.png" />
+	<file src="img/Blipid10.png" />
+	<file src="img/Blipid11.png" />
+	<file src="img/Blipid12.png" />
+	<file src="img/Blipid13.png" />
+	<file src="img/Blipid14.png" />
+	<file src="img/Blipid15.png" />
+	<file src="img/Blipid16.png" />
+	<file src="img/Blipid17.png" />
+	<file src="img/Blipid18.png" />
+	<file src="img/Blipid19.png" />
+	<file src="img/Blipid20.png" />
+	<file src="img/Blipid21.png" />
+	<file src="img/Blipid22.png" />
+	<file src="img/Blipid23.png" />
+	<file src="img/Blipid24.png" />
+	<file src="img/Blipid25.png" />
+	<file src="img/Blipid26.png" />
+	<file src="img/Blipid27.png" />
+	<file src="img/Blipid28.png" />
+	<file src="img/Blipid29.png" />
+	<file src="img/Blipid30.png" />
+	<file src="img/Blipid31.png" />
+	<file src="img/Blipid32.png" />
+	<file src="img/Blipid33.png" />
+	<file src="img/Blipid34.png" />
+	<file src="img/Blipid35.png" />
+	<file src="img/Blipid36.png" />
+	<file src="img/Blipid37.png" />
+	<file src="img/Blipid38.png" />
+	<file src="img/Blipid39.png" />
+	<file src="img/Blipid40.png" />
+	<file src="img/Blipid41.png" />
+	<file src="img/Blipid42.png" />
+	<file src="img/Blipid43.png" />
+	<file src="img/Blipid44.png" />
+	<file src="img/Blipid45.png" />
+	<file src="img/Blipid46.png" />
+	<file src="img/Blipid47.png" />
+	<file src="img/Blipid48.png" />
+	<file src="img/Blipid49.png" />
+	<file src="img/Blipid50.png" />
+	<file src="img/Blipid51.png" />
+	<file src="img/Blipid52.png" />
+	<file src="img/Blipid53.png" />
+	<file src="img/Blipid54.png" />
+	<file src="img/Blipid55.png" />
+	<file src="img/Blipid56.png" />
+	<file src="img/Blipid57.png" />
+	<file src="img/Blipid58.png" />
+	<file src="img/Blipid59.png" />
+	<file src="img/Blipid60.png" />
+	<file src="img/Blipid61.png" />
+	<file src="img/Blipid62.png" />
+	<file src="img/Blipid63.png" />
+
+    <script src="player_map_server.lua" type="server" />
+    <script src="player_map_client.lua" type="client" cache="true" />
+</meta>

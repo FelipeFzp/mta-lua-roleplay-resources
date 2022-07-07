@@ -8,6 +8,7 @@ OK - Carregar resource player_blips
 OK - Criar spawn point
 OK - Melhorar camera de morte
 OK - Fazer gestão dos veículos dos players
+OK - Criar mapa no tab que mostre blips e markers https://wiki.multitheftauto.com/wiki/DxDrawImage
 
 f_required_login_panel
 OK - Ao entrar a GUI fica escondida e o usuário precisa criar ou entrar com sua conta
@@ -43,7 +44,7 @@ OK - Fazer fades no final das missões, para ficar mais amigavel
 			OK - Criar missão com caminhão de incêndio
 			OK - Criar missão com extintor de incêndio (Dar exintor)
 			OK - Melhorar instruções da missão de caminhão de bombeiros
-			PENDENTE - Cria pontos de incendios ROAD_ACCIDENT, FLORESTAL_ACCIDENT, HOUSE_ACCIDENT
+			PENDENTE - Cria pontos de incendios ROAD_ACCIDENT, FLORESTAL_ACCIDENT, HOUSE_ACCIDENT https://www.google.com/search?q=gta+sa+cities+names&tbm=isch&ved=2ahUKEwjAy6H2itD4AhUHYRoKHSoXCIIQ2-cCegQIABAA&oq=gta+sa+cities+names&gs_lcp=CgNpbWcQAzoECCMQJzoECAAQHlD-AliMCWDCCmgAcAB4AIABgQKIAeALkgEDMi02mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=r-u6YoC4JYfCaaquoJAI&bih=929&biw=1920#imgrc=Mp3yBJ-WY_U9-M
 			PENDENTE - Tratar para caso não tenha lista de coordenadas manter as originais, é o caso das HOUSE_ACCIDENT
 		Ideias futuras:
 			Missões aleatórias via rádio
@@ -53,8 +54,6 @@ OK - Fazer fades no final das missões, para ficar mais amigavel
 		Quanto menos tempo aumenta o premio final ao entregar caminhão de lixo
 		Precisa buzinar para pegar o lixo
 	
-
-
 f_actions_panel
 Painel no qual o usuário pode acessar
 	OK - Menu dd trabalho (Solicitar carro da profissão, ver estatisticas, como cancelar um serviço em andamento)
@@ -70,6 +69,7 @@ Painel no qual o usuário pode acessar
 	
 f_car_shop
 OK - Permitir comprar um carro e trocar a cor no momento da compra https://wiki.multitheftauto.com/wiki/CreateVehicle
+PENDENTE - Pegar lista de carro com categorias do Freeroam, parar de persistir no banco veículos, mudar configuração pra ser exclusiva, digitar o que não quer a venda
 PENDENTE - trocar a cor e customizar https://wiki.multitheftauto.com/wiki/GetVehicleCompatibleUpgrades https://wiki.multitheftauto.com/wiki/Vehicle_Upgrades#Vehicles_Upgrades_(table_form) https://wiki.multitheftauto.com/wiki/AddVehicleUpgrade
 PENDENTE - customizar com objetos no veículo, attach de objetos customizados, salvar objectId,x,y,z e carregar no spawn do veículo
 

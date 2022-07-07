@@ -195,7 +195,7 @@ local function createActionsPanel()
     showCursor(false)
 
     createActionPanelButtons(ACTIONS_PANEL)
-    outputChatBox("Pressione X para abrir ou fechar o painel do personagem", 255, 255, 255, true)    
+    setTimer(function() outputChatBox("Pressione X para abrir ou fechar o painel do personagem", 255, 255, 255, true) end, 1000, 1)
 end
 addEvent("createPlayerActionsPanel", true)
 addEventHandler("createPlayerActionsPanel", localPlayer, createActionsPanel);

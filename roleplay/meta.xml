@@ -9,6 +9,7 @@
 	<include resource="actions_panel" />
 	<include resource="player_blips" />
 	<include resource="car_shop" />
+	<include resource="player_map" />
 	
     <script src="gamemode_server.lua" type="server" />
 
